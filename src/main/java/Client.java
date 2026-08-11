@@ -142,8 +142,8 @@ public class Client extends Application {
 
     public void insertValue(String value) {
         try {
-            int intValue = Integer.parseInt(value);
-            output.println("INSERT " + intValue);
+            String type = typeBox.getValue();
+            output.println(type + " INSERT " + value);
 
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
@@ -157,8 +157,8 @@ public class Client extends Application {
 
     public void searchValue(String value) {
         try {
-            int intValue = Integer.parseInt(value);
-            output.println("SEARCH " + intValue);
+            String type = typeBox.getValue();
+            output.println(type + " SEARCH " + value);
 
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
@@ -173,8 +173,9 @@ public class Client extends Application {
 
     public void deleteValue(String value){
         try {
-            int intValue = Integer.parseInt(value);
-            output.println("DELETE " + intValue);
+            String type = typeBox.getValue();
+
+            output.println(type + " DELETE " + value);
 
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
@@ -187,7 +188,8 @@ public class Client extends Application {
 
     public void drawTheTree(){
         try {
-            output.println("DRAW");
+            String type = typeBox.getValue();
+            output.println(type + " DRAW");
             String numberOfLinesString = input.readLine();
             int numberOfLinesInt = Integer.parseInt(numberOfLinesString);
             StringBuilder wholeTree = new StringBuilder();
