@@ -118,6 +118,10 @@ public class Client extends Application {
         bDelete.setOnAction(e -> {
            deleteValue(argumentField.getText());
         });
+
+        bDraw.setOnAction(e -> {
+           drawTheTree();
+        });
     }
 
 
@@ -178,6 +182,22 @@ public class Client extends Application {
             messageField.setText("Musisz podać liczbę");
         } catch(Exception e) {
             messageField.setText("Wystąpił błąd: " + e.getMessage());
+        }
+    }
+
+    public void drawTheTree(){
+        try {
+            output.println("DRAW");
+            String numberOfLinesString = input.readLine();
+            int numberOfLinesInt = Integer.parseInt(numberOfLinesString);
+            StringBuilder wholeTree = new StringBuilder();
+            for (int i = 0; i < numberOfLinesInt; i++) {
+                wholeTree.append(input.readLine()).append("\n");
+            }
+            treeArea.setText(wholeTree.toString());
+
+        } catch(Exception e) {
+            messageField.setText("Wystąpił bład: " + e.getMessage());
         }
     }
 }

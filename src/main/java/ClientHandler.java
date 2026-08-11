@@ -22,12 +22,14 @@ public class ClientHandler extends Thread{
             while ((message = input.readLine()) != null) {
                 String[] parts = message.split(" ");
                 String command = parts[0].toUpperCase();
-                int value = Integer.parseInt(parts[1]);
+
 
                 if (command.equals("INSERT")) {
+                    int value = Integer.parseInt(parts[1]);
                     tree.insert(value);
                     output.println("Dodano do drzewa binarnego wartość: " + value);
                 } else if (command.equals("SEARCH")) {
+                    int value = Integer.parseInt(parts[1]);
                     boolean result;
                     result = tree.search(value);
                     if (result) {
@@ -36,8 +38,18 @@ public class ClientHandler extends Thread{
                         output.println("Nie znaleziono wartości: " + value);
                     }
                 } else if (command.equals("DELETE")){
+                    int value = Integer.parseInt(parts[1]);
                     tree.deleteNode(value);
                     output.println("Usunięto wartość: " + value);
+                } else if (command.equals("DRAW")) {
+                    String drawnTree = tree.draw();
+                    String[] lines = drawnTree.split("\n");
+                    output.println(lines.length);
+
+                    for(String line : lines) {
+                        output.println(line);
+                    }
+
                 }
             }
         } catch (Exception e) {
