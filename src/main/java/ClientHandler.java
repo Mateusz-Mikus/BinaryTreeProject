@@ -35,6 +35,9 @@ public class ClientHandler extends Thread{
                     } else {
                         output.println("Nie znaleziono wartości: " + value);
                     }
+                } else if (command.equals("DELETE")){
+                    tree.deleteNode(value);
+                    output.println("Usunięto wartość: " + value);
                 }
             }
         } catch (Exception e) {

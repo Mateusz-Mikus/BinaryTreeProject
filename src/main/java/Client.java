@@ -115,6 +115,9 @@ public class Client extends Application {
             searchValue(argumentField.getText());
         });
 
+        bDelete.setOnAction(e -> {
+           deleteValue(argumentField.getText());
+        });
     }
 
 
@@ -161,6 +164,20 @@ public class Client extends Application {
         } catch(Exception e ){
             messageField.setText("Wystąpił błąd: " + e.getMessage());
 
+        }
+    }
+
+    public void deleteValue(String value){
+        try {
+            int intValue = Integer.parseInt(value);
+            output.println("DELETE " + intValue);
+
+            String responseFromServer = input.readLine();
+            messageField.setText(responseFromServer);
+        } catch(NumberFormatException e) {
+            messageField.setText("Musisz podać liczbę");
+        } catch(Exception e) {
+            messageField.setText("Wystąpił błąd: " + e.getMessage());
         }
     }
 }
