@@ -27,6 +27,14 @@ public class ClientHandler extends Thread{
                 if (command.equals("INSERT")) {
                     tree.insert(value);
                     output.println("Dodano do drzewa binarnego wartość: " + value);
+                } else if (command.equals("SEARCH")) {
+                    boolean result;
+                    result = tree.search(value);
+                    if (result) {
+                        output.println("Znaleziono wartość: " + value);
+                    } else {
+                        output.println("Nie znaleziono wartości: " + value);
+                    }
                 }
             }
         } catch (Exception e) {

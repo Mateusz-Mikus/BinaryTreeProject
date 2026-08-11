@@ -110,6 +110,11 @@ public class Client extends Application {
         bInsert.setOnAction(e -> {
             insertValue(argumentField.getText());
         });
+
+        bSearch.setOnAction(e -> {
+            searchValue(argumentField.getText());
+        });
+
     }
 
 
@@ -140,6 +145,22 @@ public class Client extends Application {
             messageField.setText("Musisz podać liczbę");
         } catch(Exception e){
             messageField.setText("Wystąpił błąd: " + e.getMessage());
+        }
+    }
+
+    public void searchValue(String value) {
+        try {
+            int intValue = Integer.parseInt(value);
+            output.println("SEARCH " + intValue);
+
+            String responseFromServer = input.readLine();
+            messageField.setText(responseFromServer);
+
+        } catch (NumberFormatException e){
+            messageField.setText("Musisz podać liczbę");
+        } catch(Exception e ){
+            messageField.setText("Wystąpił błąd: " + e.getMessage());
+
         }
     }
 }
