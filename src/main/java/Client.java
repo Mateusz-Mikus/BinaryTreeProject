@@ -102,8 +102,26 @@ public class Client extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
+        bConnect.setOnAction(e -> {
+            establishConnection();
+        });
     }
 
 
+    public void establishConnection(){
+        int port = 4444;
+        String ip = "localhost";
+        try {
+            Socket socket = new Socket(ip, port);
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            output = new PrintWriter(socket.getOutputStream(), true);
+
+            messageField.setText("Połączono pomyślnie");
+
+        } catch (Exception e ){
+            messageField.setText("Wystąpił błąd: " + e.getMessage());
+        }
+    }
 
 }
