@@ -18,11 +18,17 @@ public class ClientHandler extends Thread{
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
-            output.println("Utworzono dla ciebie nowy wątek");
-            String message = input.readLine();
-            int number = Integer.parseInt(message);
-            tree.insert(number);
-            System.out.println(tree.draw());
+            String message;
+            while ((message = input.readLine()) != null) {
+                String[] parts = message.split(" ");
+                String command = parts[0].toUpperCase();
+                int value = Integer.parseInt(parts[1]);
+
+                if (command.equals("INSERT")) {
+                    tree.insert(value);
+                    output.println("Dodano do drzewa binarnego wartość: " + value);
+                }
+            }
         } catch (Exception e) {
             System.out.println("Wystąpił błąd: " + e.getMessage());
         }

@@ -106,6 +106,10 @@ public class Client extends Application {
         bConnect.setOnAction(e -> {
             establishConnection();
         });
+
+        bInsert.setOnAction(e -> {
+            insertValue(argumentField.getText());
+        });
     }
 
 
@@ -113,7 +117,7 @@ public class Client extends Application {
         int port = 4444;
         String ip = "localhost";
         try {
-            Socket socket = new Socket(ip, port);
+            socket = new Socket(ip, port);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new PrintWriter(socket.getOutputStream(), true);
 
@@ -124,4 +128,18 @@ public class Client extends Application {
         }
     }
 
+    public void insertValue(String value) {
+        try {
+            int intValue = Integer.parseInt(value);
+            output.println("INSERT " + intValue);
+
+            String responseFromServer = input.readLine();
+            messageField.setText(responseFromServer);
+
+        } catch(NumberFormatException e) {
+            messageField.setText("Musisz podać liczbę");
+        } catch(Exception e){
+            messageField.setText("Wystąpił błąd: " + e.getMessage());
+        }
+    }
 }
