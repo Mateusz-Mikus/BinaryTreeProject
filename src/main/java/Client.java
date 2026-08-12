@@ -148,8 +148,6 @@ public class Client extends Application {
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
 
-        } catch(NumberFormatException e) {
-            messageField.setText("Musisz podać liczbę");
         } catch(Exception e){
             messageField.setText("Wystąpił błąd: " + e.getMessage());
         }
@@ -163,8 +161,6 @@ public class Client extends Application {
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
 
-        } catch (NumberFormatException e){
-            messageField.setText("Musisz podać liczbę");
         } catch(Exception e ){
             messageField.setText("Wystąpił błąd: " + e.getMessage());
 
@@ -179,8 +175,6 @@ public class Client extends Application {
 
             String responseFromServer = input.readLine();
             messageField.setText(responseFromServer);
-        } catch(NumberFormatException e) {
-            messageField.setText("Musisz podać liczbę");
         } catch(Exception e) {
             messageField.setText("Wystąpił błąd: " + e.getMessage());
         }

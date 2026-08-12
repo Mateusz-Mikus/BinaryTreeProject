@@ -125,43 +125,6 @@ public class Tree<T extends Comparable<T>> {
         }
     }
 
-    /**
-     * Wykonuje wstawienie nowej wartości do drzewa.
-     * @param value Element przeznaczony do wstawienia.
-     * @return true, jeśli wstawienie się powiodło; false, jeśli element juz znajduje się w drzewie.
-     */
-    public synchronized boolean insertold(T value) {
-        Node newNode = new Node(value);
-
-        if (root == null) {
-            root = newNode;
-            return true;
-        }
-
-        Node current = root;
-        Node parent;
-
-        while (true) {
-            parent = current;
-
-            if (value.compareTo(current.value) < 0) {
-                current = current.left;
-                if (current == null) {
-                    parent.left = newNode;
-                    return true;
-                }
-            } else if (value.compareTo(current.value) > 0) {
-                current = current.right;
-                if (current == null) {
-                    parent.right = newNode;
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-
-    }
 
     /**
      * Przeszukuje strukturę drzewa w celu zlokalizowania zadanego elementu.
