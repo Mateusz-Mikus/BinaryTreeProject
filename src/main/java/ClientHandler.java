@@ -65,24 +65,28 @@ public class ClientHandler extends Thread{
             }
             return;
         }
-        int value = Integer.parseInt(theValue);
-        if (command.equals("INSERT")) {
+        try {
+            int value = Integer.parseInt(theValue);
+            if (command.equals("INSERT")) {
 
-            integerTree.insert(value);
-            output.println("Dodano do drzewa binarnego wartość: " + value);
-        } else if (command.equals("SEARCH")) {
+                integerTree.insert(value);
+                output.println("Dodano do drzewa binarnego wartość: " + value);
+            } else if (command.equals("SEARCH")) {
 
-            boolean result;
-            result = integerTree.search(value);
-            if (result) {
-                output.println("Znaleziono wartość: " + value);
-            } else {
-                output.println("Nie znaleziono wartości: " + value);
+                boolean result;
+                result = integerTree.search(value);
+                if (result) {
+                    output.println("Znaleziono wartość: " + value);
+                } else {
+                    output.println("Nie znaleziono wartości: " + value);
+                }
+            } else if (command.equals("DELETE")){
+
+                integerTree.deleteNode(value);
+                output.println("Usunięto wartość: " + value);
             }
-        } else if (command.equals("DELETE")){
-
-            integerTree.deleteNode(value);
-            output.println("Usunięto wartość: " + value);
+        } catch(NumberFormatException e) {
+            output.println("Musisz wpisać typ integer");
         }
     }
 
@@ -127,25 +131,31 @@ public class ClientHandler extends Thread{
             return;
         }
 
-        double value = Double.parseDouble(theValue);
-        if (command.equals("INSERT")) {
+        try {
+            double value = Double.parseDouble(theValue);
 
-            doubleTree.insert(value);
-            output.println("Dodano do drzewa binarnego wartość: " + value);
-        } else if (command.equals("SEARCH")) {
+            if (command.equals("INSERT")) {
 
-            boolean result;
-            result = doubleTree.search(value);
-            if (result) {
-                output.println("Znaleziono wartość: " + value);
-            } else {
-                output.println("Nie znaleziono wartości: " + value);
+                doubleTree.insert(value);
+                output.println("Dodano do drzewa binarnego wartość: " + value);
+            } else if (command.equals("SEARCH")) {
+
+                boolean result;
+                result = doubleTree.search(value);
+                if (result) {
+                    output.println("Znaleziono wartość: " + value);
+                } else {
+                    output.println("Nie znaleziono wartości: " + value);
+                }
+            } else if (command.equals("DELETE")){
+
+                doubleTree.deleteNode(value);
+                output.println("Usunięto wartość: " + value);
             }
-        } else if (command.equals("DELETE")){
-
-            doubleTree.deleteNode(value);
-            output.println("Usunięto wartość: " + value);
+        } catch(NumberFormatException e) {
+            output.println("Musisz wpisać typ double");
         }
+
     }
 
     public void commandForPerson(String command, PrintWriter output, String theValue, Tree<Person> personTree){
@@ -160,27 +170,32 @@ public class ClientHandler extends Thread{
             return;
         }
 
-        String[] parts = theValue.split("_");
-        int age = Integer.parseInt(parts[1]);
-        String name = parts[0];
-        Person p = new Person(age, name);
-        if (command.equals("INSERT")) {
+        try {
+            String[] parts = theValue.split("_");
+            int age = Integer.parseInt(parts[1]);
 
-            personTree.insert(p);
-            output.println("Dodano do drzewa binarnego wartość: " + p.toString());
-        } else if (command.equals("SEARCH")) {
+            String name = parts[0];
+            Person p = new Person(age, name);
+            if (command.equals("INSERT")) {
 
-            boolean result;
-            result = personTree.search(p);
-            if (result) {
-                output.println("Znaleziono wartość: " + p);
-            } else {
-                output.println("Nie znaleziono wartości: " + p);
+                personTree.insert(p);
+                output.println("Dodano do drzewa binarnego wartość: " + p.toString());
+            } else if (command.equals("SEARCH")) {
+
+                boolean result;
+                result = personTree.search(p);
+                if (result) {
+                    output.println("Znaleziono wartość: " + p);
+                } else {
+                    output.println("Nie znaleziono wartości: " + p);
+                }
+            } else if (command.equals("DELETE")) {
+
+                personTree.deleteNode(p);
+                output.println("Usunięto wartość: " + p);
             }
-        } else if (command.equals("DELETE")){
-
-            personTree.deleteNode(p);
-            output.println("Usunięto wartość: " + p);
+        } catch(Exception e) {
+            output.println("Musisz wpisać typ Person. Przykładowo: Marek_25");
         }
     }
 
